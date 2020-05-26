@@ -29,7 +29,7 @@ i=1
    # i=i+1
 
 #print ('Введите текст для поиска')
-#search = input()
+search = input()
 #res = es.search(index = 'main',body={'query': {'fuzzy': {'Содержание' : search}}}) #нечёткий поиск
 #ToOut=json.dumps(res, ensure_ascii=False, sort_keys=True, indent=4) #форматированный вывод
 #print(ToOut)
@@ -39,7 +39,7 @@ text = file.read()
 file.close()
 
 text = FormatText(text)
-search = FormatText(text) #ИЗМЕНЕНО НА TEXT
+search = FormatText(search) 
 
 splittext = text.split()
 splitsearch = search.split()
@@ -56,8 +56,7 @@ for item in splittext:
     if (len(item)>3):
         item = item[0:-1]
         textlist.append(item)        
-
-
+ 
 
 #избавляемся от повторов
 textlist=set(textlist)
@@ -67,187 +66,102 @@ end_chance = 0.0
 count = 0
 
 #сравнение и расстановка весов для поиска
-for item in textlist:   
-    for searchitem in searchlist:
+for item in searchlist:   
+    check = False
+    for searchitem in textlist:
         chance = 0
         if (item==searchitem):
                  print("1" + item + ' ' + searchitem)
                  chance = 1
                  end_chance+=chance
                  count+=1
+                 check=True
                  break
 
-        elif (item==searchitem[0:-int(len(item)*0.2)]):
+        elif (item==searchitem[0:-1]):
                  print("0.8"+ item + ' ' + searchitem)
                  if (chance < 0.8) : chance = 0.8
                  end_chance+=chance
                  count+=1
+                 check=True
                  break
 
-        elif (item[0:-int(len(item)*0.2)]==searchitem):
+        elif (item[0:-1]==searchitem):
                  print("0.8"+ item + ' ' + searchitem)
                  if (chance < 0.8) : chance = 0.8
                  end_chance+=chance
-                 count+=1                 
+                 count+=1  
+                 check=True
                  break
 
-        elif (item[0:-int(len(item)*0.2)]==searchitem[0:-int(len(item)*0.2)]):
+        elif (item[0:-1]==searchitem[0:-1]):
                  print("0.64"+ item + ' ' + searchitem)
                  if (chance < 0.64) : chance = 0.64
                  end_chance+=chance
-                 count+=1                 
+                 count+=1  
+                 check=True
                  break  
 
-        elif (item==searchitem[0:-int(len(item)*0.4)]):
+        elif (item==searchitem[0:-2]):
                  print("0.6"+ item + ' ' + searchitem)
                  if (chance < 0.6) : chance = 0.6
                  end_chance+=chance
-                 count+=1                 
+                 count+=1  
+                 check=True
                  break
 
-        elif (item[0:-int(len(item)*0.4)]==searchitem):
+        elif (item[0:-2]==searchitem):
                  print("0.6"+ item + ' ' + searchitem)
                  if (chance < 0.6) : chance = 0.6
                  end_chance+=chance
-                 count+=1                
+                 count+=1   
+                 check=True
                  break
 
-        elif (item[0:-int(len(item)*0.2)]==searchitem[0:-int(len(item)*0.4)]):
+        elif (item[0:-1]==searchitem[0:-2]):
                  print("0.48"+ item + ' ' + searchitem)
                  if (chance < 0.48) : chance = 0.48
                  end_chance+=chance
-                 count+=1                 
+                 count+=1  
+                 check=True
                  break
                     
-        elif (item[0:-int(len(item)*0.4)]==searchitem[0:-int(len(item)*0.2)]):
+        elif (item[0:-2]==searchitem[0:-1]):
                  print("0.48"+ item + ' ' + searchitem)
                  if (chance < 0.48) : chance = 0.48
                  end_chance+=chance
-                 count+=1               
+                 count+=1 
+                 check=True
                  break
 
-        elif (item==searchitem[0:-int(len(item)*0.6)]):
+        elif (item==searchitem[0:-3]):
                  print("0.4"+ item + ' ' + searchitem)
                  if (chance < 0.4) : chance = 0.4
                  end_chance+=chance
-                 count+=1                 
+                 count+=1 
+                 check=True
                  break
 
-        elif (item[0:-int(len(item)*0.6)]==searchitem):
+        elif (item[0:-3]==searchitem):
                  print("0.4"+ item + ' ' + searchitem)
                  if (chance < 0.4) : chance = 0.4
                  end_chance+=chance
-                 count+=1                 
+                 count+=1 
+                 check=True
                  break
 
-        elif (item[0:-int(len(item)*0.4)]==searchitem[0:-int(len(item)*0.4)]):
+        elif (item[0:-2]==searchitem[0:-2]):
                  print("0.36"+ item + ' ' + searchitem)
                  if (chance < 0.36) : chance = 0.36
                  end_chance+=chance
-                 count+=1                 
+                 count+=1  
+                 check=True
                  break  
+    if(check==False):
+        count+=1
 
-        elif (item[0:-int(len(item)*0.2)]==searchitem[0:-int(len(item)*0.6)]):
-                 print("0.32"+ item + ' ' + searchitem)
-                 if (chance < 0.32) : chance = 0.32
-                 end_chance+=chance
-                 count+=1                 
-                 break  
-        
-        elif (item[0:-int(len(item)*0.6)]==searchitem[0:-int(len(item)*0.2)]):
-                 print("0.32"+ item + ' ' + searchitem)
-                 if (chance < 0.32) : chance = 0.32
-                 end_chance+=chance
-                 count+=1               
-                 break
-
-        elif (item[0:-int(len(item)*0.4)]==searchitem[0:-int(len(item)*0.6)]):
-                 print("0.24"+ item + ' ' + searchitem)
-                 if (chance < 0.24) : chance = 0.24
-                 end_chance+=chance
-                 count+=1                 
-                 break
-
-        elif (item[0:-int(len(item)*0.6)]==searchitem[0:-int(len(item)*0.4)]):
-                 print("0.24"+ item + ' ' + searchitem)
-                 if (chance < 0.24) : chance = 0.24
-                 end_chance+=chance
-                 count+=1                 
-                 break
-
-        elif (item==searchitem[0:-int(len(item)*0.8)]):
-                 print("0.2"+ item + ' ' + searchitem)
-                 if (chance < 0.2) : chance = 0.2
-                 end_chance+=chance
-                 count+=1                
-                 break
-
-        elif (item[0:-int(len(item)*0.8)]==searchitem):
-                 print("0.2"+ item + ' ' + searchitem)
-                 if (chance < 0.2) : chance = 0.2
-                 end_chance+=chance
-                 count+=1                 
-                 break
-
-        elif (item[0:-int(len(item)*0.6)]==searchitem[0:-int(len(item)*0.6)]):
-                 print("0.16"+ item + ' ' + searchitem)
-                 if (chance < 0.16) : chance = 0.16
-                 end_chance+=chance
-                 count+=1                
-                 break  
-
-        elif (item[0:-int(len(item)*0.2)]==searchitem[0:-int(len(item)*0.8)]):
-                 print("0.16"+ item + ' ' + searchitem)
-                 if (chance < 0.16) : chance = 0.16
-                 end_chance+=chance
-                 count+=1                 
-                 break  
-
-        elif (item[0:-int(len(item)*0.8)]==searchitem[0:-int(len(item)*0.2)]):
-                 print("0.16"+ item + ' ' + searchitem)
-                 if (chance < 0.16) : chance = 0.16
-                 end_chance+=chance
-                 count+=1                 
-                 break
-
-        elif (item[0:-int(len(item)*0.8)]==searchitem[0:-int(len(item)*0.4)]):
-                 print("0.12"+ item + ' ' + searchitem)
-                 if (chance < 0.12) : chance = 0.12
-                 end_chance+=chance
-                 count+=1                 
-                 break
-
-        elif (item[0:-int(len(item)*0.4)]==searchitem[0:-int(len(item)*0.8)]):
-                 print("0.12"+ item + ' ' + searchitem)
-                 if (chance < 0.12) : chance = 0.12
-                 end_chance+=chance
-                 count+=1                 
-                 break
-
-        elif (item[0:-int(len(item)*0.6)]==searchitem[0:-int(len(item)*0.8)]):
-                 print("0.08"+ item + ' ' + searchitem)
-                 if (chance < 0.08) : chance = 0.08
-                 end_chance+=chance
-                 count+=1                 
-                 break
-
-        elif (item[0:-int(len(item)*0.8)]==searchitem[0:-int(len(item)*0.6)]):
-                 print("0.08"+ item + ' ' + searchitem)
-                 if (chance < 0.08) : chance = 0.08
-                 end_chance+=chance
-                 count+=1                
-                 break
-
-        elif (item[0:-int(len(item)*0.8)]==searchitem[0:-int(len(item)*0.8)]):
-                 print("0.04"+ item + ' ' + searchitem)
-                 if (chance < 0.04) : chance = 0.04
-                 end_chance+=chance
-                 count+=1                 
-                 break 
-
-
-#if ((end_chance and count) !=0):
-print('Соответствие: '+ str(end_chance) +' '+ str(count)+' '+str(end_chance/count))                 
+  
+print (str((end_chance/count)*100)+' ' +str(count)) 
 
 
 #f = open('end.txt','w')
