@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Анализ компетенций", "Анализ компетенций.pyproj", "{B680286C-E04C-4C74-8E1A-F2CF385C4BB8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B680286C-E04C-4C74-8E1A-F2CF385C4BB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B680286C-E04C-4C74-8E1A-F2CF385C4BB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE55A684-D750-47F1-8AF2-7A361BD46BB5}
+	EndGlobalSection
+EndGlobal
